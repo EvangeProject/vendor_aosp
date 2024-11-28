@@ -92,7 +92,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # Overlay
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural;com.google.android.systemui.gxoverlay
-d
+
 # Include font files
 include vendor/aosp/config/fonts.mk
 
