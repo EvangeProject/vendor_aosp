@@ -289,7 +289,7 @@ PRODUCT_PACKAGES += \
     AyraIconShape \
     NothingCardService \
     NothingWallpaperPicker \
-    NothingWallpaperBasicColorStub \
+    NothingWallpapersBasicColorStub \
     NothingWeather \
     NothingCardLab
     
