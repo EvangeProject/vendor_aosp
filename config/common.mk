@@ -4,7 +4,7 @@ $(call inherit-product-if-exists, vendor/extra/product.mk)
 # Google Apps
 $(call inherit-product, vendor/gms/products/gms.mk)
 
-PRODUCT_BRAND ?= PixelOS
+PRODUCT_BRAND ?= EvangeOS
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
@@ -92,7 +92,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # Overlay
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural;com.google.android.systemui.gxoverlay
-
+d
 # Include font files
 include vendor/aosp/config/fonts.mk
 
@@ -103,6 +103,23 @@ PRODUCT_COPY_FILES += \
 # Lineage-specific file
 PRODUCT_COPY_FILES += \
     vendor/aosp/config/permissions/privapp-permissions-lineagehw.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-lineagehw.xml
+
+#NtPermss
+PRODUCT_COPY_FILES += \
+    vendor/aosp/config/permissions/privapp-permissions-com.nothing.wallpaper.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-com.nothing.wallpaper.xml \
+    vendor/aosp/config/permissions/privapp-permissions-com.nothing.launcher.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-com.nothing.launcher.xml \
+    vendor/aosp/config/permissions/privapp-permissions-com.nothing.proxy.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-com.nothing.proxy.xml 
+    
+#NtSysconfs
+PRODUCT_COPY_FILES += \
+    vendor/aosp/prebuilt/common/etc/sysconfig/com.nothing.cardservice.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/com.nothing.cardservice.xml \
+    vendor/aosp/prebuilt/common/etc/sysconfig/com.nothing.experimental.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/com.nothing.experimental.xml \
+    vendor/aosp/prebuilt/common/etc/sysconfig/com.nothing.hearthstone.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/com.nothing.hearthstone.xml \
+    vendor/aosp/prebuilt/common/etc/sysconfig/com.nothing.launcher.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/com.nothing.launcher.xml \
+    vendor/aosp/prebuilt/common/etc/sysconfig/com.nothing.launcher-hiddenapi-package-whitelist.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/com.nothing.launcher-hiddenapi-package-whitelist.xml \
+    vendor/aosp/prebuilt/common/etc/sysconfig/com.nothing.proxy.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/com.nothing.proxy.xml \
+    vendor/aosp/prebuilt/common/etc/sysconfig/com.nothing.soundrecorder.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/com.nothing.soundrecorder.xml \
+    vendor/aosp/prebuilt/common/etc/sysconfig/com.nothing.wallpaper.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/com.nothing.wallpaper.xml
 
 # Do not include art debug targets
 PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
@@ -221,14 +238,26 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    dalvik.vm.systemuicompilerfilter=speed
+    dalvik.vm.systemuicompilerfilter=speed \
+    ro.config.launcher=NothingLauncher3 \
+    ro.config.launcher_packages=com.nothing.launcher
+    
 
 # Overlays
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
     vendor/aosp/overlay
 
 PRODUCT_PACKAGE_OVERLAYS += \
-    vendor/aosp/overlay/common
+    vendor/aosp/overlay/common \
+    vendor/aosp/overlay/NtOverlays/IconShapePebbleOverlay \
+    vendor/aosp/overlay/NtOverlays/IconShapeRoundedOverlay \
+    vendor/aosp/overlay/NtOverlays/IconShapeRoundedRectOverlay \
+    vendor/aosp/overlay/NtOverlays/IconShapeSquareOverlay \
+    vendor/aosp/overlay/NtOverlays/IconShapeSquircleOverlay \
+    vendor/aosp/overlay/NtOverlays/IconShapeTaperedRectOverlay \
+    vendor/aosp/overlay/NtOverlays/IconShapeVesselOverlay \
+    vendor/aosp/overlay/NtOverlays/IconShapeTeardropOverlay \
+    vendor/aosp/overlay/NtOverlays/QuickSwitchOverlay
 
 PRODUCT_PACKAGES += \
     AndroidBlackThemeOverlay \
@@ -236,7 +265,8 @@ PRODUCT_PACKAGES += \
     DocumentsUIOverlay \
     NetworkStackOverlay \
     NavigationBarNoHintOverlay \
-    ThemedIconsOverlay
+    ThemedIconsOverlay \
+    
 
 # TextClassifier
 PRODUCT_PACKAGES += \
@@ -251,6 +281,24 @@ CUSTOM_LOCALES += \
     gd_GB \
     cy_GB \
     fur_IT
+
+# NtThings
+PRODUCT_PACKAGES += \
+    NothingLauncher3 \
+    NothingThemesStub \
+    AyralconShape \
+    NothingCardService \
+    NothingWallpaperPicker \
+    NothingWallpaperBasicColorStub \
+    NothingWeather \
+    NothingCardLab
+    
+#NtLibs
+PRODUCT_PACKAGES += \
+    libmorpho_MotionSensor \
+    libmorpho_rapid_effect_jni \
+    libNativeSecurity
+
 
 include vendor/aosp/config/version.mk
 
