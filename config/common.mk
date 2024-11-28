@@ -286,7 +286,7 @@ CUSTOM_LOCALES += \
 PRODUCT_PACKAGES += \
     NothingLauncher3 \
     NothingThemesStub \
-    AyralconShape \
+    AyraIconShape \
     NothingCardService \
     NothingWallpaperPicker \
     NothingWallpaperBasicColorStub \
